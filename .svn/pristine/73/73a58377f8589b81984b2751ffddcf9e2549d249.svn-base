@@ -1,0 +1,75 @@
+<div class="page-container">
+                <div class="fix-width">
+                    <div class="page-have-sidebar">
+                        <div class="page-wrap">
+                            <div class="breadcumb">
+                                <a class="home" href="#">
+                                    <i class="fa fa-home">
+                                    </i>
+                                    Trang chủ
+                                </a>
+                                <span class="sep">
+                                </span>
+                                <a href="#">
+                                   Đăng nhập
+                                </a>
+                                <div class="clear">
+                                </div>
+                            </div>
+                            <div id="login-form" class="user-form-popup mfp-with-anim">
+                                <div class="popup-header">
+                                    <h2>Đăng nhập</h2>
+                                </div>
+                                <div class="text-center"><%= message %></div>
+                                <div class="popup-content">
+                                    <form action="/login" method="post">
+                                        <input type="hidden" name="type" value="member">
+                                        <div class="form-row">
+                                            <label>Tên đăng nhập *</label>
+                                            <input type="text" required="" name="username">
+                                        </div>                  
+                                        <div class="form-row">
+                                            <label>Mật khẩu *</label>
+                                            <input type="password" required="" name="password">
+                                        </div>                              
+                                        <div class="form-row">
+                                            <input type="submit" value="Đăng nhập">
+                                            <a href="/quen-mat-khau" class="lostpass">Quên mật khẩu?</a>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                                <div class="popup-footer">
+                                    <p>Bạn chưa có tài khoản? <a href="/dang-ky">Đăng ký</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar">
+                            <div class="sidebar-widget menu-widget">
+                                <div class="widgettitle">
+                                    <h3>
+                                       Quản lí tài khoản
+                                    </h3>
+                                </div>
+                                <div class="widgetcontent">
+                                    <ul>
+                                        <li>
+                                            <a href="">
+                                                Thay đổi thông tin cá nhân
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                Thay đổi mật khẩu
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                </div>
+            </div>

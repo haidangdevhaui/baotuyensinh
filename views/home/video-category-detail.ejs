@@ -1,0 +1,279 @@
+<div class="page-container">
+	<div class="fix-width">
+		<div class="page-have-sidebar">
+			<div class="page-wrap">
+				<div class="breadcumb">
+					<a href="/" class="home"><i class="fa fa-home"></i> Trang chủ</a>
+					<span class="sep"></span>
+					<a href="video">Video</a>
+					<span class="sep"></span>
+					<a href="#"><%= data.cmedia.name %></a>
+					<div class="clear"></div>
+				</div>									
+				<div class="media-area">
+					<h3 class="title video-icon"><%= data.cmedia.name %></h3>
+					<div class="list-media">
+						<% for(var v in data.medias){ if(data.medias[v].type._id == data.cmedia._id){ %>
+						<div class="three-col">
+							<div class="item video">
+								<div class="thumbnail">
+									<a href="<%= data.medias[v].url %>">
+										<img src="<%= data.medias[v].img %>">
+										<span class="mark"></span>
+									</a>
+								</div>
+								<div class="content">
+									<a href="<%= data.medias[v].url %>">
+										<%= data.medias[v].name %>
+									</a>
+								</div>
+							</div>
+						</div>
+						<% } } %>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="adv-are">
+					<div class="row-adv">
+						<div class="two-col thumbnail">
+							<a href="">
+								<img src="images/adv/3.png">
+							</a>
+						</div>
+						<div class="two-col thumbnail">
+							<a href="">
+								<img src="images/adv/4.png">
+							</a>
+						</div>
+						<div class="clear"></div>
+						<div class="full-adv thumbnail">
+							<a href="">
+								<img src="images/adv/5.png">
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- end adv -->		
+			</div>
+			<div class="sidebar">
+				<div class="sidebar-widget menu-widget">
+	<div class="widgettitle">
+		<h3>Danh mục video</h3>
+	</div>
+	<div class="widgetcontent">
+		<ul>
+			<% for(var c in data.cmedias){ if(data.cmedias[c].type == 'video'){%>
+            <li>
+                <a href="<%= data.cmedias[c].url %>">
+                    <%= data.cmedias[c].name %>
+                </a>
+            </li>
+            <% } } %>
+		</ul>
+	</div>
+</div>
+<div class="sidebar-widget">
+	<div class="widgettitle">
+		<h3>Tin tức nổi bật</h3>
+	</div>
+	<div class="widgetcontent">
+		<div class="list-blog-sidebar">
+			<% var a = 0; for(var h in data.posts){ if(data.posts[h].hot == true){ a ++;%>
+			<div class="item">
+				<div class="thumbnail">
+					<a href="/<%= data.posts[h].url %>">
+						<img src="<%= data.posts[h].img %>">
+					</a>
+				</div>
+				<div class="content">
+					<a href="/<%= data.posts[h].url %>"><%= data.posts[h].name %></a>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<% if(a == 5) break;} } %>
+		</div>
+	</div>
+</div>
+<div class="sidebar-widget">
+	<div class="widgettitle">
+		<h3>Thư viện hình ảnh</h3>
+	</div>
+	<div class="widgetcontent">
+		<!-- Place somewhere in the <body> of your page -->
+		<div id="slider" class="flexslider">
+		  <ul class="slides">
+		    <li>
+		      <img src="images/blog/slide1.png" />
+		    </li>
+		    <li>
+		      <img src="images/blog/slide1.png" />
+		    </li>
+		    <li>
+		      <img src="images/blog/slide1.png" />
+		    </li>
+		    <li>
+		      <img src="images/blog/slide1.png" />
+		    </li>
+		    <!-- items mirrored twice, total of 12 -->
+		  </ul>
+		</div>
+		<div id="carousel" class="flexslider controle-nav">
+		  <ul class="slides">
+		    <li>
+		    	<div class="thumbnail">
+			    <img src="images/blog/slide1.png" />
+			    </div>
+		    </li>
+		    <li>
+		      	<div class="thumbnail">
+			    <img src="images/blog/slide1.png" />
+			    </div>
+		    </li>
+		    <li>
+		      	<div class="thumbnail">
+			    <img src="images/blog/slide1.png" />
+			    </div>
+		    </li>
+		    <li>
+		      	<div class="thumbnail">
+			    <img src="images/blog/slide1.png" />
+			    </div>
+		    </li>
+		    <!-- items mirrored twice, total of 12 -->
+		  </ul>
+		</div>
+	</div>
+</div>
+<div class="sidebar-widget">
+	<div class="widgettitle">
+		<h3>Thư viện video</h3>
+	</div>
+	<div class="widgetcontent">
+		<div class="data.mediaslide">
+			<div class="video-iframe">
+				<iframe></iframe>
+			</div>
+			<div class="video-list">
+				<ul>
+					<li class="current"><a href="bM7SZ5SBzyY"><i class="fa fa-video-camera"></i>Phóng sự báo cáo kết quả đại hội IX Báo Tuyển sinh</a></li>
+					<li><a href="FjNdYp2gXRY"><i class="fa fa-video-camera"></i>Hội sinh viên Việt Nam vươn tầm ra thế giới, gắn chặt tình đoàn kết</a></li>
+					<li><a href="jK2aIUmmdP4"><i class="fa fa-video-camera"></i>Tổng kết nhiệm vụ - kết quả Quý III năm 2014 trong hoạt động Hội sinh viên Việt Nam</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sidebar-widget">
+    <div class="widgettitle">
+        <h3>
+            Thăm dò ý kiến
+        </h3>
+    </div>
+    <div class="widgetcontent rate-form">
+        <p>
+            <strong>
+                Bạn thấy website trình bày có hợp lý và đẹp mắt không?
+            </strong>
+        </p>
+        <form method="post" action="" class="form-vote">
+            <label>
+                <input type="radio" value="4" name="rate">
+                    Rất tuyệt vời
+                
+            </label>
+            <label>
+                <input type="radio" value="3" name="rate">
+                    Chuyên nghiệp
+                
+            </label>
+            <label>
+                <input type="radio" value="2" name="rate">
+                    Bình thường
+                
+            </label>
+            <label>
+                <input type="radio" value="1" name="rate">
+                    Kém
+                
+            </label>
+            <input type="submit" value="Bình chọn" class="submit-btn submit-form">
+            <a id="xemkq" class="submit-btn result-form">
+                Xem kết quả
+            </a>
+        </form>
+
+    </div>
+</div>
+<!-- sidebar adv -->
+<div class="sidebar-widget">
+	<div class="thumbnail">
+		<a href="">
+			<img src="images/adv/6.png">
+		</a>
+	</div>
+</div>
+<div class="sidebar-widget">
+	<div class="thumbnail">
+		<a href="">
+			<img src="images/adv/7.png">
+		</a>
+	</div>
+</div>
+<div class="sidebar-widget">
+	<div class="thumbnail">
+		<a href="">
+			<img src="images/adv/8.png">
+		</a>
+	</div>
+</div>
+<!--  scrip for page have sidebar slide -->
+<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+<!--
+	$(window).load(function() {
+	  // The slider being synced must be initialized first
+	  $('#carousel').flexslider({
+	    animation: "slide",
+	    controlNav: false,
+	    animationLoop: false,
+	    slideshow: false,
+	    itemWidth: 100,
+	    itemMargin: 0,
+	    asNavFor: '#slider',
+	    prevText: '<i class="fa fa-angle-left"></i>',           //String: Set the text for the "previous" directionNav item
+	    nextText: '<i class="fa fa-angle-right"></i>',
+	  });
+	 
+	  $('#slider').flexslider({
+	    animation: "slide",
+	    controlNav: false,
+	    animationLoop: false,
+	    slideshow: false,
+	    sync: "#carousel",
+	    prevText: '<i class="fa fa-angle-left"></i>',           //String: Set the text for the "previous" directionNav item
+	    nextText: '<i class="fa fa-angle-right"></i>',
+	  });
+	  // video slide scrip
+	  $('.data.mediaslide').each(function(){
+		var iframe = $(this).find('.video-iframe iframe'),						
+			current = $(this).find('.video-list .current a').attr('href'),
+			src = 'http://www.youtube.com/embed/',
+			video_lists = $(this).find('.video-list li');
+			iframe.attr('src',src+current);
+			video_lists.find('a').click(function(){
+				var youtubeid = $(this).attr('href'),
+					parent = $(this).closest('li'),
+					emb = src+youtubeid+'?autoplay=1&cc_load_policy=1';//autoplay
+					iframe.attr('src',emb);
+					video_lists.removeClass('current');
+					parent.addClass('current');
+				return false;
+			});
+	  });
+	});
+//-->
+</script>			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title><%= title %></title>   
+    <!-- icon fonts --> 
+    <link rel="Shortcut icon" href="/images/homepage.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <!-- style from js -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="css/flexslider.css">
+    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
+    <!-- style -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <!-- jquery -->
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+    <!-- slider js -->
+    <script type="text/javascript" src="js/jquery.bxslider.js"></script>
+    <script type="text/javascript" src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
+    <script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="js/mains.js"></script>
+    <script type="text/javascript" src="js/jquery.jcarousel.js"></script>
+    <script type="text/javascript" src="js/player.js"></script>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.5&appId=1443549702600571";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="page-wrap">
+    <div class="header">
+        <div class="top-header">
+            <div class="fix-width">
+                <div class="top-link">
+                    <ul>
+                        <li class="active"><a href="#">Baotuyensinh.vn</a></li>
+                        <li><a href="#">Dantri.vn</a></li>
+                        <li><a href="#">Vnexpress.com.vn</a></li>
+                        <li><a href="#">Vietnamnet.vn</a></li>
+                        <% if(data.user){ %>
+                        <li><a href="/thong-tin-ca-nhan">Chào <%= data.user.username.substr(0, 10); %>
+                        <% if(data.user.username.length >= 10){ %>...<% } %>
+                        </a></li>
+                        <li><a href="/logout">Thoát</a></li>
+                        <% }else{ %>
+                        <li><a class="user-popup" href="#login-form">Thành viên</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+                <div class="top-action">
+                    <div class="search-form">
+                        <form action="/tim-kiem" method="get">
+                            <input type="text" name="s" value="" placeholder="Từ khóa tìm kiếm">
+                            <button class="search-btn" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <a href="" class="sitemap"><i class="fa fa-sitemap"></i></a>
+                    <ul class="social">
+                        <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                        <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                        <li><a href=""><i class="fa fa-youtube"></i></a></li>
+                        <li><a href=""><img src="images/icon/blogger1.svg" width="14"></a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>  
+        <div class="center-header">
+            <div class="fix-width">
+                <!-- responsive button for nav-menu -->
+                <a href="#responsive-menu" class="res-btn res-nav-btn" data-body="true"><span></span></a>
+                <a href="/" class="logo">
+                    <img src="images/logo.png" width="106" class="logo-desktop">
+                    <img src="images/logo-mobile.png" width="106" class="logo-mobile">
+                </a>
+                <div class="admore-header top-action">
+                    <a href="" class="sitemap"><i class="fa fa-sitemap"></i></a>
+                    <ul class="social">
+                        <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                        <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                        <li><a href=""><i class="fa fa-youtube"></i></a></li>
+                        <li><a href=""><img src="images/icon/blogger1.svg" width="14"></a></li>
+                    </ul>
+                </div>
+                <div class="adv-header">
+                    <a href="#">
+                        <img src="images/adv/1.png">
+                    </a>
+                    <a href="#">
+                        <img src="images/adv/2.png">
+                    </a>
+                </div>
+                <% for(var i in data.ads){ if(data.ads[i].position.position == 'banner' && data.ads[i].status == true){ %>
+                    <a href="<%= data.ads[i].link %>" <% if(data.ads[i].open == true){ %>target="_blank" <% } %>>
+                        <img src="<%= data.ads[i].img %>" alt="" style="width: <%= data.ads[i].size.w %>px; height: <%= data.ads[i].size.h %>px;">
+                    </a>
+                <% } }%>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="bottom-header">
+            <div class="fix-width">
+                <div id="responsive-menu" class="nav-menu">
+                    <div class="search-form">
+                        <div class="user-action-group">
+                            <% if(data.user){ %>
+                            Chào <a href="/thong-tin-ca-nhan"><%= data.user.username %></a>
+                            <a href="/logout">Thoát</a>
+                            <% }else{ %>
+                            <ul>
+                                <li><a class="user-popup" href="#login-form">Thành viên</a></li>
+                            </ul>
+                            <% } %>
+                            <div class="clear"></div>
+                        </div>
+                    <!-- this search form show in mobile menu and hidden in desktop -->
+                        <form action="/tim-kiem" method="get">
+                            <input type="text" name="s" value="" placeholder="Từ khóa tìm kiếm">
+                            <button class="search-btn" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <ul>
+                        <li class="home current-menu"><a href="/"><span>Trang chủ</span></a></li>
+                        <% for(var i in data.menu){ %>
+                        <li class="has-sub-menu">
+                            <a href="<%= data.menu[i].url %>"><%= data.menu[i].name %></a>
+                            <span class="arrow"><i class="fa fa-chevron-down"></i></span>
+                            <div class="sub-menu">
+                            <div class="list-smenu">
+                                <p class="menu-title">Danh mục</p>
+                                <% if(data.menu[i].url == 'media'){ %>
+                                <ul>
+                                    <li><a href="video">Video</a></li>
+                                    <li><a href="hinh-anh">Hình ảnh</a></li>
+                                </ul>
+                                <% } %>
+                                <ul>
+                                    <% for(var c in data.categories){ if(data.categories[c].type.url == data.menu[i].url){ %>
+                                    <li><a href="<%= data.categories[c].url %>"><%= data.categories[c].name %></a></li>
+                                    <% } } %>
+                                </ul>
+                            </div>
+                            <div class="nav-news">
+                                <p class="menu-title">Mới nhất</p>
+
+                                <% if(data.menu[i].url == 'media'){ %>
+                                <% var a = 0; for(var m in data.medias){ a ++;%>
+
+                                <div class="item first">
+                                    <div class="thumbnail">
+                                        <a href="<%= data.medias[m].url %>">
+                                            <img src="<%= data.medias[m].img %>">
+                                        </a>
+                                    </div>
+                                    <a href="<%= data.medias[m].url %>" class="title">
+                                        <%= data.medias[m].name %>
+                                    </a>
+                                    <div class="clear"></div>
+                                    <p class="detail"><%= data.returnDate(data.medias[m].crt) %> | <i class="fa fa-comment-o"></i> <span><%= data.medias[m].views %></span></p>
+                                </div>
+
+                                <% if(a == 3) break;} }%>
+
+                                <% var a = 0; for(var p in data.posts){ if(data.posts[p].type.url == data.menu[i].url){ a ++;%>
+                                <div class="item first">
+                                    <div class="thumbnail">
+                                        <a href="<%= data.posts[p].url %>">
+                                            <img src="<%= data.posts[p].img %>">
+                                        </a>
+                                    </div>
+                                    <a href="<%= data.posts[p].url %>" class="title">
+                                        <%= data.posts[p].name %>
+                                    </a>
+                                    <div class="clear"></div>
+                                    <p class="detail"><%= data.returnDate(data.posts[p].crt) %> | <i class="fa fa-comment-o"></i> <span><%= data.posts[p].views %></span></p>
+                                </div>
+                                <% if(a == 3){break; }%>
+                                <% } }%>
+                            </div>
+                            <div class="nav-feature">
+                                <p class="menu-title">Nổi bật</p>
+                                <% if(data.menu[i].url == 'media'){ %>
+                                <% for(var m in data.medias){ if(data.medias[m].hot == true){ %>
+                                <div class="item">
+                                    <div class="thumbnail">
+                                        <a href="<%= data.medias[m].url %>">
+                                            <img src="<%= data.medias[m].img %>">
+                                        </a>
+                                    </div>
+                                    <a href="<%= data.medias[m].url %>" class="title">
+                                        <%= data.medias[m].name %>
+                                    </a>
+                                    <div class="clear"></div>
+                                    <p class="detail"><%= data.returnDate(data.medias[m].crt) %> | <i class="fa fa-comment-o"></i> <span><%= data.medias[m].views %></span></p>
+                                    <p><%= data.medias[m].desc.substr(0, 50) %> </p>
+                                </div>
+                                <% break;} } }%>
+
+                                <% var a = 0; for(var p in data.posts){ if(data.posts[p].type.url == data.menu[i].url && data.posts[p].hot == true){ %>
+                                <div class="item">
+                                    <div class="thumbnail">
+                                        <a href="<%= data.posts[p].url %>">
+                                            <img src="<%= data.posts[p].img %>">
+                                        </a>
+                                    </div>
+                                    <a href="<%= data.posts[p].url %>" class="title">
+                                        <%= data.posts[p].name %>
+                                    </a>
+                                    <div class="clear"></div>
+                                    <p class="detail"><%= data.returnDate(data.posts[p].crt) %> | <i class="fa fa-comment-o"></i> <span><%= data.posts[p].views %></span></p>
+                                    <p><%= data.posts[p].desc.substr(0, 50) %> </p>
+                                </div>
+                                <% break;} }%>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <% } %>
+                        <li><a href="/lien-he">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="timeline">
+            <div class="fix-width">
+                <div class="marquee relative">
+                    <label>Dòng sự kiện</label>
+                    <div class="marquee-slide">
+                        <ul>
+                            <li><a href="">Tuyển sinh trung cấp cao đẳng, đại học năm 2014 <span>| 18/07/2014</span></a></li>
+                            <li><a href="">Tuyển sinh trung cấp cao đẳng, đại học năm 2014 <span>| 18/07/2014</span></a></li>
+                            <li><a href="">Tuyển sinh trung cấp cao đẳng, đại học năm 2014 <span>| 18/07/2014</span></a></li>
+                        </ul>
+                    </div>
+                    <a href="tel:0913.686.389" class="tel">HOTLINE: 0913.686.389</a>
+                    <div class="clear"></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- end header -->
+
+<!-- begin page content -->
+<%- body %>
+<!-- scrip only for home page -->
+<!-- scroll js -->
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function(){
+    // using for all blog slide
+    $('.blogs-slide ul').each(function(){
+        var margin = $(this).data('margin'),
+            width = $(this).data('width');
+        $(this).bxSlider({
+              minSlides: 2,
+              maxSlides: 4,
+              slideWidth: width,
+              slideMargin: margin,
+              pager:false,
+              nextText: '<i class="fa fa-angle-right"></i>',
+              prevText: '<i class="fa fa-angle-left"></i>',
+        });
+    }); 
+    //using for menu slide in cat_blog
+    $('.menu-slide ul').each(function(){
+        var minitem = $(this).data('min'),
+            next = $(this).data('next'),
+            prev = $(this).data('prev');
+        $(this).carouFredSel({          
+            scroll: 1,
+            prev: next,
+            next: prev,
+            auto: false,    
+            items: {                
+                visible:{
+                    min: minitem,                   
+                    max: 4,         
+                }
+            }
+        })
+    });
+    //using for scroll 
+    $(".scrollarea").mCustomScrollbar();
+});
+//-->
+</script>
+    <div class="clients-are">
+        <div class="fix-width">
+            <div class="school-are">
+                <h4>Đối tác các trường</h4>
+                <div class="fredsel-slider">
+                    <ul>
+                        <% for(var i in data.ads){ if(data.ads[i].position.position == 'school' && data.ads[i].status == true){ %>
+                        <li>
+                            <a href="<%= data.ads[i].link %>" <% if(data.ads[i].open == true){ %>target="_blank" <% } %>>
+                                <img src="<%= data.ads[i].img %>" width="117" height="73">
+                            </a>
+                        </li>
+                        <% } } %>
+                    </ul>
+                </div>
+                <!-- control slide #main.js -->
+                <div class="slider-control">
+                    <a id="prev_school" class="prev-btn angle" href="#"><i class="fa fa-angle-left"></i></a>
+                    <a id="next_school" class="next-btn angle" href="#"><i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="company-area">
+                <h4>Mạng lưới hỗ trợ khởi nghiệp và lập nghiệp</h4>
+                <div class="fredsel-slider">
+                    <ul>
+                        <% for(var i in data.ads){ if(data.ads[i].position.position == 'suppost' && data.ads[i].status == true){ %>
+                        <li>
+                            <a href="<%= data.ads[i].link %>" <% if(data.ads[i].open == true){ %>target="_blank" <% } %>>
+                                <img src="<%= data.ads[i].img %>" width="117" height="73">
+                            </a>
+                        </li>
+                        <% } } %>
+                    </ul>
+                    <!-- control slide #main.js -->
+                    <div class="slider-control">
+                        <a id="prev_com" class="prev-btn angle" href="#"><i class="fa fa-chevron-left"></i></a>
+                        <a id="next_com" class="next-btn angle" href="#"><i class="fa fa-chevron-right"></i></a>
+                    </div>  
+                </div>                  
+            </div>
+        </div>
+    </div><!-- end clients slider -->
+    <div class="footer">
+        <div class="fix-width">
+            <div class="top-footer">
+                <div class="subcribe-form">
+                    <label>Tham gia nhận bản tin từ chúng tôi</label>
+                    <form action="">
+                        <input type="email" placeholder="youremail@email">
+                        <input type="submit" class="subcribe-btn" value="">
+                    </form>
+                    <div class="clear"></div>
+                </div>
+                <div class="social-footer">
+                    <ul>
+                        <li class="facebook"><a href=""><i class="fa fa-facebook"></i></a></li>
+                        <li class="twitter"><a href=""><i class="fa fa-twitter"></i></a></li>
+                        <li class="google"><a href=""><i class="fa fa-google-plus"></i></a></li>
+                        <li class="youtube"><a href=""><i class="fa fa-youtube"></i></a></li>
+                        <li class="blogger"><a href=""><img src="images/icon/blogger1.svg" width="14"></a></li>
+                    </ul>
+                </div>
+                <div class="views-count">
+                    <ul>
+                        <li class="current-online">Số người online: 100 </li>
+                        <li class="total-count">Tổng truy cập: 20.000 </li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="center-footer">
+                <div class="footer-detail">
+                    <h3 class="title">Giới thiệu về Báo tuyển sinh</h3>
+                    <div class="item">
+                        <div class="thumbnail">
+                            <img src="images/footer-logo.png" class="">
+                        </div>
+                        <p>Báo Tuyển Sinh là trang thông tin điện tử lớn nhất dành cho các bạn học sinh sinh viên quan tâm đến các trường đại học cao đẳng có nhu cầu đăng ký nhập</p>
+                        <p>Người học đại học ra thất nghiệp nhiều quá, em không biết mình có nên thi đại học không mặc dù rất thích làm kế toán.Trong khi đi xin việc thủ tục thiết yếu và bắt buộc phải có là CV xin việc cá nhân. Với mẫu CV đó cũng là một yếu tố then chốt quyết định bạn thành...</p>
+                    </div>
+                </div>
+                <div class="feature-event">
+                    <h3 class="title">Sự kiện nổi bật</h3>
+                    <div class="event-list">
+                        <% var a = 0; for(var p in data.posts){ if(data.posts[p].hot == true){ a ++; %>
+                        <div class="item">
+                            <div class="thumbnail">
+                                <a href="">
+                                    <img src="<%= data.posts[p].img %>">
+                                </a>
+                            </div>
+                            <div class="content">
+                                <a href="/<%= data.posts[p].url %>"><%= data.posts[p].name %></a>
+                                <p>(Ngày đăng: <%= data.returnDate(data.posts[p].crt) %> - Lượt xem: <%= data.posts[p].views %>)</p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <% if(a == 5){ break;} } } %>
+                    </div>
+                </div>
+                <div class="fanpage">
+                    <h3 class="title">Fanpage Facebook</h3>
+                    <div class="fb-page" data-href="https://www.facebook.com/baotuyensinh" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" data-show-posts="false">
+                        <div class="fb-xfbml-parse-ignore">
+                            <blockquote cite="https://www.facebook.com/baotuyensinh">
+                            <a href="https://www.facebook.com/baotuyensinh">BÁO TUYỂN SINH</a></blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="bottom-footer">
+                <center>
+                    <h3>BÁO TUYỂN SINH</h3>
+                    <h4>TRANG TIN THÔNG TIN GIÁO DỤC - TUYỂN SINH - HƯỚNG NGHIỆP- DU HỌC - VIỆC LÀM  TRỰC TUYẾN</h4>
+                </center>
+                    <p>
+                        Tòa soạn: Phòng 203 nhà B2 Học viện Báo chí - Tuyên truyền, Số 36 Xuân Thủy, Cầu Giấy, Hà Nội<br/>
+                        Chịu trách nhiệm nội dung: Nguyễn Liên<br/>
+                        Đường dây nóng: 04 668 39 668<br/>
+                        Email: baotuyensinh@gmail.com - Website: www.baotuyensinh.vn<br/>
+                        Hiện đang chạy thử nghiệm chờ cấp phép.<br/>
+                    </p>
+                
+            </div>
+        </div>
+    </div><!-- end footer -->
+</div><!-- end pagewrap -->
+<!-- form dang nhap va dang ky -->
+<div id="login-form" class="user-form-popup mfp-with-anim mfp-hide">
+   <div class="popup-content">
+      <div class="frm-login">
+         <div class="popup-head">Đăng nhập tài khoản</div>
+         <form method="post" id="loginForm">
+            <table class="tbl-login">
+               <tr>
+                  <td><label>Tên đăng nhập</label></td>
+                  <td><input type="text" id="username"> <i>(*)</i></td>
+               </tr>
+               <tr>
+                  <td><label>Mật khẩu</label></td>
+                  <td><input type="password" id="password"> <i>(*)</i></td>
+               </tr>
+               <tr>
+                  <td></td>
+                  <td><input type="submit" value="Đăng nhập"><span id="notice">Các ô có dấu <i>(*)</i> là bắt buộc điền đủ</span></td>
+               </tr>
+               <tr>
+                  <td></td>
+                  <td>
+                     <ul>
+                        <li><a href="#"><img src="images/fb.png" alt=""></a></li>
+                        <li><a href="#"><img src="images/tw.png" alt=""></a></li>
+                        <li><a href="#"><img src="images/gg.png" alt=""></a></li>
+                     </ul>
+                  </td>
+               </tr>
+            </table>
+            </form>
+            <form method="post" id="restorePasswordForm">
+            <div class="lostpass">
+               <div class="popup-head">Khôi phục mật khẩu</div>
+               <table>
+                  <tr>
+                     <td><label>Email</label></td>
+                     <td><input type="email" required="" id="restoreEmail"> <i>(*)</i></td>
+                  </tr>
+                  <tr>
+                     <td></td>
+                     <td>
+                        <input type="submit" value="KHÔI PHỤC MẬT KHẨU">
+                        <span id="notice-restore-password"></span>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            </form>
+      </div>
+      <div class="frm-register">
+         <div class="popup-head">Tạo tài khoản mới</div>
+         <form method="post" id="registerForm">
+            <table>
+               <tr>
+                  <td><label>Họ tên</label></td>
+                  <td><input type="text" required="" id="fn"> <i>(*)</i></td>
+               </tr>
+               <tr>
+                  <td><label>Email</label></td>
+                  <td><input type="email" required="" id="em"> <i>(*)</i></td>
+               </tr>
+               <tr>
+                  <td></td>
+                  <td><input type="checkbox" id="rem" value="true"> Đăng kí nhận bản tin của <a href="#">Baotuyensinh.vn</a><br></td>
+               </tr>
+               <tr>
+                  <td><label>Tên đăng nhập</label></td>
+                  <td><input type="text" required="" id="un"> <i>(*)</i></td>
+               </tr>
+               <tr>
+                  <td><label>Mật khẩu</label></td>
+                  <td><input type="password" required="" id="pw"> <i>(*)</i></td>
+               </tr>
+               <tr>
+                  <td></td>
+                  <td>Mật khẩu phải có ít nhất 6 kí tự</td>
+               </tr>
+               <tr>
+                  <td><label>Nhập lại mật khẩu</label></td>
+                  <td><input type="password" required="" id="rpw"> <i>(*)</i></td>
+               </tr>
+               <tr>
+                  <td></td>
+                  <td><label><input type="checkbox" required=""> Tôi đồng ý với quy định của tòa soạn</label></td>
+               </tr>
+               <tr>
+                  <td></td>
+                  <td>
+                    <input type="submit" value="Đăng ký">
+                    <span id="notice-register"></span>
+                  </td>
+               </tr>
+            </table>
+         </form>
+      </div>
+   </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<div class="page-container homepage">
+    <div class="fix-width">
+        <div class="feature-area">
+            <div class="feature-blogs">
+                <% if(news[0]){ %>
+                <div class="feature-item">
+                    <div class="thumbnail">
+                        <a href="<%= news[0].url %>">
+                            <img src="<%= news[0].img %>">
+                        </a>
+                    </div>
+                    <a href="<%= news[0].url %>" class="title"><%= news[0].name %></p>
+                </div>
+                <% } %>
+                <div class="blogs-slide">
+                    <ul data-margin="12" data-width="100">
+                        <% for(var p in hots){ %>
+                        <li>
+                            <div class="item">
+                                <div class="thumbnail">
+                                    <a href="<%= hots[p].url %>">
+                                        <img src="<%= hots[p].img %>">
+                                    </a>
+                                </div>
+                                <a href="<%= hots[p].url %>" class="title"><%= hots[p].name %></a>
+                            </div>
+                        </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+            <div class="feature-news og-tabs-area">
+                <ul class="tab-menu">
+                    <li class="current"><a href="#tab1">TIN NÓNG NHẤT</a></li>
+                    <li><a href="#tab2">TIN MỚI NHẤT</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab1" class="item current">
+                        <ul>
+                            <% for(var i in hots){ %>
+                            <li><a href="<%= hots[i].url %>"><%= hots[i].name %></a></li>
+                            <% } %>
+                        </ul>
+                    </div>
+                    <div id="tab2" class="item">
+                        <ul>
+                            <% for(var i in news){ %>
+                            <li><a href="<%= news[i].url %>"><%= news[i].name %></a></li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="home-adv-area1 thumbnail">
+                <a href="#">
+                    <img src="images/home/adv/1.png">
+                </a>
+                <a href="#">
+                    <img src="images/home/adv/2.png">
+                </a>
+                <a href="#">
+                    <img src="images/home/adv/3.png">
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="center-adv thumbnail">
+            <a href=""><img src="images/home/adv/4.png"></a>
+        </div>
+        <div class="all-blogs">
+            <div class="left-side">
+                <div class="list-blogs-home">
+                    <% var a = 0; for(var i in news){ a ++;%>
+                    <div class="item">
+                        <a href="<%= news[i].url %>" class="title"><%= news[i].name %></a>
+                        <div class="thumbnail">
+                            <a href="">
+                                <img src="<%= news[i].img %>">
+                            </a>
+                        </div>
+                        <div class="content">
+                            <p><%= news[i].desc.substr(0, 120) %>
+                            <% if(news[i].desc.length > 120){ %>...<% } %>
+                            </p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <% if(a == 15){ break;}%>
+                    <% } %>
+                </div>
+                <div class="cat_blog_area">
+                    <div class="title">
+                        <h3>Video</h3>                      
+                        <div class="clear"></div>
+                    </div>
+                    <div class="list-blogs-home">
+                        <% for(var v in videos){ %>
+                        <div class="item feature video">
+                            <div class="thumbnail">
+                                <div id="player"></div>
+                                <script>
+                                  var tag = document.createElement('script');
+
+                                  tag.src = "https://www.youtube.com/iframe_api";
+                                  var firstScriptTag = document.getElementsByTagName('script')[0];
+                                  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                                  var player;
+                                  function onYouTubeIframeAPIReady() {
+                                    player = new YT.Player('player', {
+                                      height: '190',
+                                      width: '640',
+                                      videoId: '<%= videos[v].content[0].id %>',
+                                      events: {
+                                        // 'onReady': onPlayerReady,
+                                        'onStateChange': onPlayerStateChange
+                                      }
+                                    });
+                                  }
+                                  function onPlayerReady(event) {
+                                    event.target.playVideo();
+                                  }
+                                  var done = false;
+                                  function onPlayerStateChange(event) {
+                                    if (event.data == YT.PlayerState.PLAYING && !done) {
+                                      setTimeout(stopVideo, 6000);
+                                      done = true;
+                                    }
+                                  }
+                                  function stopVideo() {
+                                    player.stopVideo();
+                                  }
+                                </script>
+                            </div>
+                            <div class="content">
+                                <a href="<%= videos[v].url %>" class="title"><%= videos[v].name %></a>
+                                <p><%= videos[v].desc %></p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <% if(v == 0){break; }%>
+                        <% } %>
+                    </div>
+                    <div class="blogs-slide">
+                        <ul data-width="100" data-margin="20">
+                            <% var a = 0; for(var v in videos){ if(v > 0){ a ++;%>
+                            <li>
+                                <div class="item">
+                                    <div class="thumbnail">
+                                        <a href="<%= videos[v].url %>">
+                                            <img src="<%= videos[v].img %>">
+                                        </a>
+                                    </div>
+                                    <a href="<%= videos[v].url %>" class="title"><%= videos[v].name.substr(0, 30) %>...</a>
+                                </div>
+                            </li>
+                            <% if(a == 5){break; } %>
+                            <% } } %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cat_blog_area">
+                    <div class="title">
+                        <h3>HÌNH ẢNH</h3>                       
+                        <div class="clear"></div>
+                    </div>
+                    <div class="list-blogs-home">
+                        <div class="item feature">
+                            <div class="thumbnail">
+                                <a href="">
+                                    <img src="images/home/blog/8.png">
+                                    <span class="mark"></span>
+                                </a>
+                            </div>
+                            <div class="content">
+                                <a href="" class="title">Nghề truyền thống </a>
+                                <p>Ngày đăng: 22/11/2014 - Lượt xem: 1.200</p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="blogs-slide">
+                        <ul data-width="100" data-margin="20">
+                            <li>
+                                <div class="item">
+                                    <div class="thumbnail">
+                                        <a href="#">
+                                            <img src="images/home/blog/2.png">
+                                        </a>
+                                    </div>
+                                    <a href="" class="title">Suối yến mùa Thu</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <div class="thumbnail">
+                                        <a href="#">
+                                            <img src="images/home/blog/2.png">
+                                        </a>
+                                    </div>
+                                    <a href="" class="title">Suối yến mùa Thu</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <div class="thumbnail">
+                                        <a href="#">
+                                            <img src="images/home/blog/2.png">
+                                        </a>
+                                    </div>
+                                    <a href="" class="title">Suối yến mùa Thu</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <div class="thumbnail">
+                                        <a href="#">
+                                            <img src="images/home/blog/2.png">
+                                        </a>
+                                    </div>
+                                    <a href="" class="title">Nhiều trường trung học phổ thông, ...</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side">
+                <% for(var i in types){ %>
+                <div class="cat_blog_area grid">
+                    <div class="title">
+                        <h3><%= types[i].name %></h3>
+                        <!-- show readmore khi o phone -->
+                        <a class="readmore show-phone" href="<%= types[i].url %>">Xem thêm</a>
+                        <div class="menu-slide">
+                            <ul data-min="4" data-next="#cat_2_next" data-prev="#cat_2_prev">
+                                <% for(var c in categories){ if(categories[c].type._id == types[i]._id){ %>
+                                <li><a href="<%= categories[c].url %>"><%= categories[c].name %></a></li>
+                                <% } } %>
+                            </ul>
+                            <a href="#" id="cat_2_next" class="menu-control next"></a>
+                            <a href="#" id="cat_2_prev" class="menu-control prev"></a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="list-blogs-home">
+                        <% var a = 0; for(var p in news){ if(news[p].type._id == types[i]._id){ a ++;%>
+                        <div class="item">
+                            <a href="<%= news[p].url %>" class="title"><%= news[p].name %></a>
+                            <div class="thumbnail">
+                                <a href="">
+                                    <img src="<%= news[p].img %>">
+                                </a>
+                            </div>
+                            <div class="content">
+                                <p><%= news[p].desc.substr(0, 120) %>
+                                <% if(news[p].desc.length > 120){ %>...<% } %>
+                                </p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <% if(a == 1){break;}%>
+                        <% } } %>
+                    </div>
+                    <div class="more_blogs">
+                        <ul>
+                            <% var a = 0; for(var p in news){ if(news[p].type._id == types[i]._id){ a ++;%>
+                            <% if(a > 1){ %>
+                            <li><a href="<%= news[p].url %>"><%= news[p].name %></a></li>
+                            <% if(a == 2){break;}%>
+                            <% } } }%>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <% } %>
+            </div>
+            <div class="adv-side">
+                <div class="thumbnail item">
+                    <a href="#">
+                        <img src="images/home/adv/7.png">
+                    </a>
+                </div>
+                <div class="thumbnail item">
+                    <a href="#">
+                        <img src="images/home/adv/7.png">
+                    </a>
+                </div>
+                <div class="thumbnail item">
+                    <a href="#">
+                        <img src="images/home/adv/7.png">
+                    </a>
+                </div>
+                <div class="thumbnail item">
+                    <a href="#">
+                        <img src="images/home/adv/7.png">
+                    </a>
+                </div>
+                <div class="thumbnail item">
+                    <a href="#">
+                        <img src="images/home/adv/7.png">
+                    </a>
+                </div>
+                <div class="thumbnail item">
+                    <a href="#">
+                        <img src="images/home/adv/7.png">
+                    </a>
+                </div>
+                <div class="thumbnail item">
+                    <a href="#">
+                        <img src="images/home/adv/7.png">
+                    </a>
+                </div>
+                <div class="thumbnail item">
+                    <a href="#">
+                        <img src="images/home/adv/7.png">
+                    </a>
+                </div>
+                <div class="thumbnail item">
+                    <a href="#">
+                        <img src="images/home/adv/7.png">
+                    </a>
+                </div>
+                <div class="thumbnail item">
+                    <a href="#">
+                        <img src="images/home/adv/7.png">
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

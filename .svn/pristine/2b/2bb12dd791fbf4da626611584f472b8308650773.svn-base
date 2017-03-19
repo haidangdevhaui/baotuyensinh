@@ -1,0 +1,222 @@
+var User = require('./models/user');
+var passport = require('passport'),
+    flash = require('connect-flash'),
+    hash  = require('password-hash'),
+    Key = require('./models/key'),
+    LocalStrategy = require('passport-local').Strategy;
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
+passport.use(new LocalStrategy(function(username, password, done) {
+    User.findOne({
+        username: username
+    }, function(err, user) {
+        if (err) {
+            return done(err);
+        }
+        if (!user) {
+            return done('Tên đăng nhập hoặc mật khẩu không hợp lệ', null);
+        }
+        if (!hash.verify(password, user.password)) {
+            return done('Tên đăng nhập hoặc mật khẩu không hợp lệ', null);
+        }
+        if(user.status == 0){
+            return done(null, false, 'Tài khoản chưa được kích hoạt');
+        }
+        return done(null, user);
+    });
+}));
+module.exports = function(app) {
+    app.get('/admin', function(req, res) {
+        if (req.user) {
+            if(req.user.auth == 0){
+                return res.redirect('/');
+            }
+            return res.redirect('/dashboard');
+        }
+        res.render('member/login', {layout: 'layoutnull'});
+    });
+
+    app.post('/login', function(req, res, next) {
+        passport.authenticate('local', function(err, user, info) {
+            if (err) {
+                if(req.xhr){
+                    return res.json({
+                        result: false,
+                        error: err
+                    });
+                }
+                if(req.body.type == "member"){
+                    req.flash('message', err);
+                    return res.redirect('/dang-nhap');
+                }
+                return res.redirect('/login');
+            }
+            if(info){
+                if(req.xhr){
+                    return res.json({
+                        result: false,
+                        error: info
+                    });
+                }
+                if(req.body.type == "member"){
+                    req.flash('message', info);
+                    return res.redirect('/dang-nhap');
+                }
+            }
+            // if (!user) {
+            //     if (req.xhr) {
+            //         return res.json({
+            //             result: false,
+            //             data: null
+            //         });
+            //     }
+            // }
+            req.logIn(user, function(err) {
+                // if (req.xhr) {
+                //     return res.json({
+                //         result: true,
+                //         data: user
+                //     });
+                // }
+                if (err) {
+                    return next(err);
+                }
+                if (user.auth == 1 || user.auth == 2) {
+                    if(req.xhr){
+                        return res.json({
+                            result: true,
+                            isAdmin: true
+                        });
+                    }
+                    res.redirect('/dashboard');
+                }
+                if (user.auth == 0) {
+                    if(req.xhr){
+                        return res.json({
+                            result: true,
+                            isAdmin: false
+                        });
+                    }
+                    res.redirect('/');
+                }
+                
+            });
+        })(req, res, next);
+    });
+
+    app.get('/dashboard/*', isAdmin, function(req, res) {
+        res.render('dashboard', {layout: 'layoutnull'});
+    });
+    app.get('/dashboard', isAdmin, function(req, res) {
+        res.render('dashboard', {layout: 'layoutnull'});
+    });
+    app.post('/api/v1/login', function(req, res) {
+        User.findOne({
+            username: req.body.username,
+            password: req.body.password
+        }, function(err, user) {
+            if (user) {
+                res.json({
+                    result: true,
+                    data: [user]
+                });
+            } else {
+                res.json({
+                    result: false,
+                    data: null
+                });
+            }
+        });
+    });
+    app.post('/register', function(req, res) {
+        User.findOne({
+            email: req.body.email
+        }, {
+            username: req.body.username
+        }, function(err, u) {
+            if (u) {
+                return res.redirect('/');
+            } else {
+                req.body.password = hash.generate(req.body.password);
+                new User(req.body).save(function(err, u) {
+                    new Key({email: req.body.email}).save(function(err, k){
+                        require('./mail')({
+                            from: "Báo tuyển sinh",
+                            to: req.body.email,
+                            subject: "Kích hoạt tài khoản",
+                            text: '',
+                            html: '<div style="background:#18A689;color:#FFF;padding:10px;line-height:30px;width:500px">Chào bạn, chúng tôi nhận được yêu cầu đăng ký thành viên của bạn.Hãy nhấn vào <a href="' + req.protocol + '://' + req.get('host') + '/active-account?key='+k.key+'">đây</a> để kích hoạt tài khoản.Xin cảm ơn!<br/>(Chú ý: Liên kết này sẽ hết hạn trong vòng 24h kể từ thời điểm đăng ký)</div>'
+                        });
+                        req.flash('message', 'Đăng ký thành công, hãy kiểm tra email để kích hoạt tài khoản của bạn');
+                        res.redirect('/thong-bao');
+                    });
+                    
+                });
+            }
+        });
+    });
+    app.get('/active-account', function(req, res){
+        Key.findOne({key: req.query.key}, function(err, k){
+            if(!k){
+                return res.redirect('/');
+            }
+            if(Date.now() < k.timeout){
+                User.findOne({email: k.email}, function(err, u){
+                    u.status = 1;
+                    u.save(function(err, u){
+                        Key.remove({key: req.query.key}).exec();
+                        req.flash('message', 'Kích hoạt tài khoản thành công! <a href="/dang-nhap">Đăng nhập</a> ngay');
+                        return res.redirect('/thong-bao');
+                    });
+                });
+            }else{
+                Key.remove({key: req.query.key}).exec();
+                req.flash('message', 'Đường dẫn kích hoạt tài khoản đã hết hạn!');
+                return res.redirect('/thong-bao');
+            }
+        });
+    });
+    app.get('/api/v1/user', function(req, res) {
+        if (req.user) {
+            req.user.password = null;
+        }
+        res.json(req.user);
+    });
+    app.get('/logout', function(req, res) {
+        var auth = req.user.auth;
+        req.logout();
+        if(auth == 0){
+            return res.redirect('/');
+        }
+        return res.redirect('/login');
+    });
+    app.post('/profile/update', isLoggedIn, function(req, res){
+        User.findById(req.user._id, function(err, u){
+            // if(u.email == req.body.email);
+            User.update({_id: req.user._id}, req.body, function(err, u){
+                return res.redirect('/thong-tin-ca-nhan');
+            })
+        });
+    });
+    function isLoggedIn(req, res, next) {
+        if (req.user) {
+            return next();
+        }
+        return res.redirect('/');
+    }
+
+    function isAdmin(req, res, next) {
+        // return next();
+        if(!req.user){
+            return res.redirect('/login');
+        }
+        if (req.user.auth == 1 || req.user.auth == 2) {
+            return next();
+        }
+        return res.redirect('/');
+    }
+}

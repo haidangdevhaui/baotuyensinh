@@ -1,0 +1,60 @@
+/**
+ * @license Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
+ */
+CKEDITOR.editorConfig = function(config) {
+    // Define changes to default configuration here.
+    // For complete reference see:
+    // http://docs.ckeditor.com/#!/api/CKEDITOR.config
+    // The toolbar groups arrangement, optimized for two toolbar rows.
+    config.language = "vi";
+    // config.extraPlugins = 'uploadimage';
+    config.skin= "office2013";
+    config.toolbarGroups = [{
+        name: 'clipboard',
+        groups: ['clipboard', 'undo']
+    }, {
+        name: 'editing',
+        groups: ['find', 'selection', 'spellchecker']
+    }, {
+        name: 'links'
+    }, {
+        name: 'insert'
+    }, {
+        name: 'forms'
+    }, {
+        name: 'tools'
+    }, {
+        name: 'document',
+        groups: ['mode', 'document', 'doctools']
+    }, {
+        name: 'others'
+    }, '/', {
+        name: 'basicstyles',
+        groups: ['basicstyles', 'cleanup']
+    }, {
+        name: 'paragraph',
+        groups: ['list', 'indent', 'blocks', 'align', 'bidi']
+    }, {
+        name: 'styles'
+    }, {
+        name: 'colors'
+    }, {
+        name: 'about'
+    }];
+
+    
+    
+    config.format_tags = 'p;h1;h2;h3;pre';
+    // Simplify the dialog windows.
+    // config.removeDialogTabs = 'image:advanced;link:advanced';
+    config.filebrowserBrowseUrl = '/plugins/ckfinder/ckfinder.html';
+    config.filebrowserImageBrowseUrl = '/plugins/ckfinder/ckfinder.html?type=Images';
+    config.filebrowserFlashBrowseUrl = '/plugins/ckfinder/ckfinder.html?type=Flash';
+    // config.filebrowserUploadUrl = '/plugins/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
+    // config.filebrowserImageUploadUrl = '/plugins/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';
+    // config.filebrowserFlashUploadUrl = '/plugins/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
+    config.filebrowserUploadUrl = '/api/v1/upload';
+    config.filebrowserImageUploadUrl = '/api/v1/upload';
+    config.filebrowserFlashUploadUrl = '/api/v1/upload';
+};

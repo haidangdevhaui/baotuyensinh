@@ -1,0 +1,107 @@
+app.config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider.state('dashboard', {
+            url: "/dashboard",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/home.html"
+                }
+            }
+        }).state('news', {
+            url: "/dashboard/news",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/news.html"
+                }
+            }
+        }).state('news-create', {
+            url: "/dashboard/news/create",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/news-create.html"
+                }
+            }
+        }).state('news-update', {
+            url: "/dashboard/news/update/:id",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/news-create.html"
+                }
+            }
+        }).state('news-detail', {
+            url: "/dashboard/news/detail/:id",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/news-detail.html"
+                }
+            }
+        }).state('types', {
+            url: "/dashboard/types",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/types.html"
+                }
+            }
+        })
+        /*user*/
+        .state('users', {
+            url: "/dashboard/users",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/user.html"
+                }
+            }
+        })
+        .state('profile', {
+            url: "/dashboard/profile/:id",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/profile.html"
+                }
+            }
+        })
+        /**/
+        .state('menu', {
+            url: "/dashboard/menu",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/menu.html"
+                }
+            }
+        })
+        /*contact*/
+        .state('contact', {
+            url: "/dashboard/contact",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/contact.html"
+                }
+            }
+        })
+        /*video*/
+        .state('media', {
+            url: "/dashboard/media",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/media.html"
+                }
+            }
+        })
+        .state('media-category', {
+            url: "/dashboard/category-media",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/media-category.html"
+                }
+            }
+        })
+        .state('media-create', {
+            url: "/dashboard/create-media",
+            views: {
+                "appView": {
+                    templateUrl: "/views/cpanel/media-create.html"
+                }
+            }
+        })
+
+        $urlRouterProvider.otherwise('/dashboard');
+});

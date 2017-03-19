@@ -1,0 +1,138 @@
+<div class="page-container">
+	<div class="fix-width">
+		<div class="page-have-sidebar">
+			<div class="page-wrap">
+				<div class="breadcumb">
+					<a href="#" class="home"><i class="fa fa-home"></i> Trang chủ</a>
+					<span class="sep"></span>
+					<a href="#">Hình ảnh</a>
+					<span class="sep"></span>
+					<a href="#"><%= data.image.type.name %></a>
+					<div class="clear"></div>
+				</div>									
+				<div class="media-area">		
+					<h1 class="single-title"><%= data.image.name %></h1>	
+					<p class="date">Ngày đăng: <%= data.image.crt %> - <%= data.image.views %> lượt xem</p>		
+					<div class="list-media gallery-image">
+						<% for(var i in data.image.images){ %>
+						<div class="three-col album-item">
+							<div class="item picture">
+								<div class="thumbnail">
+									<a href="<%= data.image.images[i] %>" title="Title of image">
+										<img src="<%= data.image.images[i] %>">
+										<span class="view"><span class="icon"></span></span>
+									</a>
+								</div>								
+							</div>
+						</div>
+						<% } %>
+						<div class="clear"></div>
+					</div>					
+				</div>		
+				<div class="blog-action margin-top">
+					<a href="" class="back">Về trang trước</a>
+					<a href="" class="totop">Lên đầu trang</a>
+				</div>		
+				<div class="related-media">
+					<h3 class="title">Các Album khác</h3>
+					<div class="list-media">
+						<div class="three-col">
+							<div class="item picture">
+								<div class="thumbnail">
+									<a href="">
+										<img src="images/media/1.png">
+										<span class="mark"></span>
+									</a>
+								</div>
+								<div class="content">
+									<a href="">
+										Hình ảnh hoạt động của Báo tuyển sinh
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="three-col">
+							<div class="item picture">
+								<div class="thumbnail">
+									<a href="">
+										<img src="images/media/2.png">
+										<span class="mark"></span>
+									</a>
+								</div>
+								<div class="content">
+									<a href="">
+										Hình ảnh hoạt động của Báo tuyển sinh
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="three-col">
+							<div class="item picture">
+								<div class="thumbnail">
+									<a href="">
+										<img src="images/media/1.png">
+										<span class="mark"></span>
+									</a>
+								</div>
+								<div class="content">
+									<a href="">
+										Hình ảnh hoạt động của Báo tuyển sinh
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="adv-are">
+					<div class="row-adv">
+						<div class="two-col thumbnail">
+							<a href="">
+								<img src="images/adv/3.png">
+							</a>
+						</div>
+						<div class="two-col thumbnail">
+							<a href="">
+								<img src="images/adv/4.png">
+							</a>
+						</div>
+						<div class="clear"></div>
+						<div class="full-adv thumbnail">
+							<a href="">
+								<img src="images/adv/5.png">
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- end adv -->		
+			</div>
+			<div class="sidebar">
+				<div class="sidebar-widget menu-widget">
+	<div class="widgettitle">
+		<h3>Danh mục hình ảnh</h3>
+	</div>
+	<div class="widgetcontent">
+		<ul>
+			<% for(var i in data.cmedias){ if(data.cmedias[i].type == 'image'){ %>
+			<li><a href="/<%= data.cmedias[i].url %>"><%= data.cmedias[i].name %></a></li>
+			<% } } %>
+		</ul>
+	</div>
+</div>
+</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('.gallery-image').each(function() {
+	    $(this).magnificPopup({
+	        delegate: 'a',
+	        type: 'image',
+	        gallery: {
+	          enabled:true
+	        }
+	    });
+	});
+</script>

@@ -1,0 +1,88 @@
+<div ng-controller="menuCtrl">
+	<div class="row">
+		<div class="col-sm-12">
+            <div class="btn-group pull-right m-t-15">
+                <!-- <button aria-expanded="false" class="btn btn-custom dropdown-toggle waves-effect waves-light" data-toggle="dropdown" type="button">
+                    Cài đặt
+                    <span class="m-l-5">
+                        <i class="fa fa-cog">
+                        </i>
+                    </span>
+                </button> -->
+                <!-- <button class="btn btn-success" type="button" ui-sref="users">
+                    <span class="m-l-5">
+                        <i class="fa fa-long-arrow-left">
+                        </i>
+                    </span>
+                    Danh sách người dùng
+                </button> -->
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="#">
+                            Action
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Another action
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Something else here
+                        </a>
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li>
+                        <a href="#">
+                            Separated link
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <h4 class="page-title">
+               	Quản lý MENU
+            </h4>
+        </div>
+        <div class="col-lg-12">
+        	<div class="col-lg-6">
+        		<div class="card-box">
+        			<div class="form-group" ng-repeat="type in types">
+	                    <div class="checkbox checkbox-custom">
+	                        <input type="checkbox" id="checkbox{{$index}}" value="{{type.type.url}}" ng-checked="isMenu(type.type.url, menus)" ng-click="addMenu(type.type)">
+	                        <label for="checkbox{{$index}}">
+	                            {{type.type.name}}
+	                        </label>
+	                    </div>
+	                </div>
+        		</div>
+        	</div>
+        	<div class="col-lg-6">
+        		<div class="card-box">
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Danh mục cha</th>
+									<th>Vị trí</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in menus">
+									<td>{{$index+1}}</td>
+									<td>{{item.name}}</td>
+									<td>
+										<button class="btn btn-success btn-sm" ng-if="$index != 0" ng-click="sort(item._id)"><i class="zmdi zmdi-eject"></i></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+        	</div>
+        	
+        </div>
+	</div>
+</div>

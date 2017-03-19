@@ -1,0 +1,2 @@
+{"_id":{"$oid":"570daf86bf7a8686cd8983bd"},"auth":1,"avatar":"/images/users/avatar-1.jpg","fullname":"Quản trị viên","password":"12345","username":"admin"}
+{"_id":{"$oid":"570dafa3bf7a8686cd8983be"},"auth":2,"avatar":"/images/users/avatar-3.jpg","fullname":"Nhân viên","password":"12345","username":"nhanvien"}

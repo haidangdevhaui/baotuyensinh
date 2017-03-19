@@ -1,0 +1,101 @@
+<div class="col-lg-12">
+    <form class="form-horizontal" ng-submit="setting(set)">
+        <h4>Trang chủ</h4>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Số lượng tin mới
+            </label>
+            <div class="col-md-10">
+                <input type="number" class="form-control" ng-model="set.home.new" required="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Số lượng tin hot
+            </label>
+            <div class="col-md-10">
+                <input type="number" class="form-control" ng-model="set.home.hot" required="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Số lượng tin nổi bật
+            </label>
+            <div class="col-md-10">
+                <input type="number" class="form-control" ng-model="set.home.high" required="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Số lượng tin ở slider
+            </label>
+            <div class="col-md-10">
+                <input type="number" class="form-control" ng-model="set.home.slider" required="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Số lượng tin ở footer
+            </label>
+            <div class="col-md-10">
+                <input type="number" class="form-control" ng-model="set.home.footer" required="">
+            </div>
+        </div>
+        <h4>Chi tiết tin tức</h4>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Số lượng tin nổi bật
+            </label>
+            <div class="col-md-10">
+                <input type="number" class="form-control" ng-model="set.post.high" required="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Số lượng ảnh
+            </label>
+            <div class="col-md-10">
+                <input type="number" class="form-control" ng-model="set.post.image" required="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Số lượng video
+            </label>
+            <div class="col-md-10">
+                <input type="number" class="form-control" ng-model="set.post.video" required="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Số lượng bài đã đăng
+            </label>
+            <div class="col-md-10">
+                <input type="number" class="form-control" ng-model="set.post.posted" required="">
+            </div>
+        </div>
+        <h4>Danh mục tin tức</h4>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Số lượng bài viết trong 1 trang
+            </label>
+            <div class="col-md-10">
+                <input type="number" class="form-control" ng-model="set.category.record" required="">
+            </div>
+        </div>
+        <h4>Danh mục hỏi đáp</h4>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Số lượng bài viết trong 1 trang
+            </label>
+            <div class="col-md-10">
+                <input type="number" class="form-control" ng-model="set.question.record" required="">
+            </div>
+        </div>
+        <div class="form-group">
+            <center>
+            <button class="btn btn-success" type="submit">Thay đổi</button>
+            </center>
+        </div>
+    </form>
+</div>

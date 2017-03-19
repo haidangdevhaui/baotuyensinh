@@ -1,0 +1,202 @@
+<div ng-controller="questionCtrl">
+    <!-- <div class="row">
+		<h4 class="page-title">Danh sách dự án</h4>
+	</div>
+	 -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="btn-group pull-right m-t-15">
+                <button class="btn btn-info" type="button" ui-sref="news-create">
+                    Đăng tin
+                    <span class="m-l-5">
+                        <i class="fa fa-edit">
+                        </i>
+                    </span>
+                </button>
+                <!-- <button aria-expanded="false" class="btn btn-custom dropdown-toggle waves-effect waves-light" data-toggle="dropdown" type="button">
+                    Cài đặt
+                    <span class="m-l-5">
+                        <i class="fa fa-cog">
+                        </i>
+                    </span>
+                </button> -->
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="#">
+                            Action
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Another action
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Something else here
+                        </a>
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li>
+                        <a href="#">
+                            Separated link
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <h4 class="page-title">
+               	Danh sách tin
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card-box table-responsive">
+                <div class="col-lg-4">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm" ng-model="search">
+                </div>
+                <div class="col-lg-2">
+                    <select ng-model="record" ng-change="Quest.getList(1, record)" class="form-control">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <select ng-model="typeFilter" ng-change="Quest.getList(typeFilter, 1, record)" class="form-control">
+                        <option value="">Hiện thị tất cả</option>
+                        <option ng-repeat="t in categories" value="{{t._id}}">{{t.name}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <div class="checkbox checkbox-danger">
+                        <input type="checkbox" id="checkbox1" ng-model="answered" ng-change="Quest.getList(typeFilter, 1, record, answered)">
+                        <label for="checkbox1">
+                            Đã trả lời
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="card-box table-responsive">
+                <div class="dropdown pull-right">
+                    <a aria-expanded="false" class="dropdown-toggle card-drop" data-toggle="dropdown" href="#">
+                        <i class="zmdi zmdi-more-vert">
+                        </i>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#">
+                                Action
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Another action
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Something else here
+                            </a>
+                        </li>
+                        <li class="divider">
+                        </li>
+                        <li>
+                            <a href="#">
+                                Separated link
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <table class="table table-striped table-bordered news-table">
+                    <thead>
+                        <tr class="tr-title">
+                            <th><i class="zmdi zmdi-unfold-more" ng-click="Quest.sort('name')"></i> Tiêu đề</th>
+                            <th>Nội dung</th>
+                            <th><i class="zmdi zmdi-unfold-more" ng-click="Quest.sort('crt')"></i> Thời gian</th>
+                            <th><i class="zmdi zmdi-unfold-more" ng-click="Quest.sort('views')"></i> Lượt xem</th>
+                            <th>Quản lý</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-if="data.length == 0">
+                            <td colspan="3"><center>Không có dữ liệu</center></td>
+                        </tr>
+                        <tr ng-repeat="item in data | filter: search | orderBy:sortKey:reverse"  id="data-{{item._id}}">
+                            <td>
+                                {{item.name}}
+                            </td>
+                            <td>
+                                {{item.content.q.substr(0, 150)}}
+                            </td>
+                            <td>
+                                {{item.crt | date : format : timezone}}
+                            </td>
+                            <td>
+                                {{item.views}}
+                            </td>
+                            <td style="min-width:140px">
+                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-success" data-toggle="modal" href='#modal-id-{{item._id}}'>Trả lời</button>
+                                    <div class="modal fade" id="modal-id-{{item._id}}">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title text-center">Trả lời câu hỏi</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Người hỏi: {{item.fullname}}<br />
+                                                    Email: {{item.email}}<br />
+                                                    Thời gian: {{item.crt | date : format : timezone}}<br />
+                                                    Nội dung: {{item.content.q}}<br />
+                                                    <div ckeditor="options" ng-model="item.content.a" ready="onReady()"></div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                                    <button type="button" class="btn btn-primary" ng-click="Quest.update(item)">Gửi trả lời</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-danger" ng-click="Quest.delete(item._id)">xóa</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end col -->
+        <div class="col-lg-12">
+            <center>
+            <div class="card-box table-responsive">
+                <nav>
+                  <ul class="pagination" ng-repeat="p in totalPage">
+                    <li ng-if="p == 1" ng-click="Quest.getList(typeFilter, currentPage-1, record)">
+                      <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li ng-class="{'disabled active':currentPage == p}">
+                        <a ng-if="currentPage == p">{{p}}</a>
+                        <a ng-if="currentPage != p" ng-click="Quest.getList(typeFilter, p, record)">{{p}}</a>
+                    </li>
+                    <li ng-if="p == totalPage.length" ng-click="Quest.getList(typeFilter, currentPage+1, record)">
+                      <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+            </div>
+            </center>
+        </div>
+    </div>
+    <!-- end row -->
+</div>

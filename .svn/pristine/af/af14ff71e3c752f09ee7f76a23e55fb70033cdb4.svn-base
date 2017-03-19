@@ -1,0 +1,144 @@
+<div ng-controller="newsCtrl">
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="btn-group pull-right m-t-15">
+                <button aria-expanded="false" class="btn btn-custom dropdown-toggle waves-effect waves-light" data-toggle="dropdown" type="button">
+                    Cài đặt
+                    <span class="m-l-5">
+                        <i class="fa fa-cog">
+                        </i>
+                    </span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="#">
+                            Action
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Another action
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Something else here
+                        </a>
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li>
+                        <a href="#">
+                            Separated link
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <h4 class="page-title">
+                Đăng tin
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card-box">
+                <div class="row">
+                    <form class="form-horizontal" method="post" ng-submit="createNews(data)" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                Tên tin
+                            </label>
+                            <div class="col-md-10">
+                                <input ng-if="action == 'create'" class="form-control" ng-model="data.name" type="text" required="">
+                                </input>
+                                <input ng-if="action == 'update'" class="form-control" ng-model="data.name" type="text" required="" disabled="">
+                                </input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                Gắn thẻ
+                            </label>
+                            <div class="col-md-10">
+                                <input class="form-control" ng-model="data.tags" type="text" placeholder="vd: bongda,thethao">
+                                </input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                Tin nóng
+                            </label>
+                            <div class="col-md-10">
+                                <div class="checkbox checkbox-danger">
+                                    <input type="checkbox" checked="" id="checkbox6" ng-model="data.hot">
+                                    <label for="checkbox6">
+                                        
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                Loại tin
+                            </label>
+                            <div class="col-md-10">
+                                <select ng-model="data.type" class="form-control" ng-change="selectType(data.type)">
+                                    <option ng-repeat="dataType in dataTypes" value="{{dataType.type._id}}">{{dataType.type.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                Danh mục tin
+                            </label>
+                            <div class="col-md-10">
+                                <select ng-model="data.category" class="form-control">
+                                    <option ng-repeat="dataCate in dataCates" value="{{dataCate._id}}">{{dataCate.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                Mô tả
+                            </label>
+                            <div class="col-md-10">
+                                <textarea class="form-control" ng-model="data.desc" required=""></textarea> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                Nội dung
+                            </label>
+                            <div class="col-md-10">
+                                <div ckeditor="options" ng-model="data.content" ready="onReady()"></div>
+                            </div>
+                        </div>
+                        <div ng-if="action == 'update'">
+                            <img class="col-md-offset-2" src="{{data.img}}" alt="" style="width: 150px;">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                Ảnh tin
+                            </label>
+                            <div class="col-md-10">
+                                <input type="file" file-model="data.img" name="img"/><br/>
+                                <input type="text" ng-model="data.imgSrc" class="form-control" placeholder="hoặc url ảnh">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button class="btn btn-success" type="submit">
+                                    <span ng-if="action == 'create'">Đăng tin</span>
+                                    <span ng-if="action == 'update'">Cập nhật tin</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

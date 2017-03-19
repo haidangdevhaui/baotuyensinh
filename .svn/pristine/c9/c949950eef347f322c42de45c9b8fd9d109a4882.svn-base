@@ -1,0 +1,3 @@
+app.controller('imageCtrl', ['$scope', '$rootScope', 'Api', '$state', function($scope, $rootScope, Api, $state){
+	
+}])
