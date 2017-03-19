@@ -1,2 +1,0 @@
-{"__v":0,"_id":{"$oid":"570f444ba557330415fb04f8"},"cid":"570f073e3ae2eaed4895f607","content":"^^!","crt":{"$date":"2016-04-14T07:13:58.477Z"},"status":1,"user":{"_id":"570daf86bf7a8686cd8983bd","auth":1,"avatar":"/images/users/avatar-1.jpg","fullname":"Quản trị viên","username":"admin"}}
-{"__v":0,"_id":{"$oid":"5715f8f09ee79dd81c426038"},"cid":"5715f8d59ee79dd81c426037","content":"@@","crt":{"$date":"2016-04-19T09:21:48.983Z"},"status":0,"user":{"fullname":"Vũ Hải Đăng","username":"haidangdevhaui@gmail.com"}}

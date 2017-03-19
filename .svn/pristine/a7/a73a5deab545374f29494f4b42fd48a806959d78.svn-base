@@ -1,7 +1,0 @@
-{"__v":0,"_id":{"$oid":"57106fafc38ac7a8147ff89c"},"crt":{"$date":"2016-04-15T04:28:02.231Z"},"name":"Tuyển sinh","url":"tuyen-sinh"}
-{"__v":0,"_id":{"$oid":"571098a6f44b864c083b9bcc"},"crt":{"$date":"2016-04-15T07:23:40.864Z"},"name":"Hướng nghiệp","url":"huong-nghiep"}
-{"__v":0,"_id":{"$oid":"571098adf44b864c083b9bcd"},"crt":{"$date":"2016-04-15T07:23:40.864Z"},"name":"Du học","url":"du-hoc"}
-{"__v":0,"_id":{"$oid":"571098bbf44b864c083b9bcf"},"crt":{"$date":"2016-04-15T07:23:40.864Z"},"name":"Teen online","url":"teen-online"}
-{"__v":0,"_id":{"$oid":"571098c0f44b864c083b9bd0"},"crt":{"$date":"2016-04-15T07:23:40.864Z"},"name":"Việc làm","url":"viec-lam"}
-{"__v":0,"_id":{"$oid":"57144c897f7b667012e7a724"},"crt":{"$date":"2016-04-18T02:44:05.122Z"},"name":"Video","url":"video"}
-{"__v":0,"_id":{"$oid":"5714a0a138a69c0c14d8a012"},"category":[],"crt":{"$date":"2016-04-18T08:53:29.111Z"},"name":"Hình ảnh","url":"hinh-anh"}
